@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
@@ -35,6 +36,15 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this@MainActivity, newWordActivity::class.java)
             startActivityForResult(intent, newWordActivityRequestCode)
         }
+        wordViewModel.deleteAll()
+
+        Log.d("test", "onCreate: dd")
+    }
+
+    //앱이 종료될 때 room에 있는 데이터 초기화
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("test", "onDestroy: dd")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?){

@@ -12,4 +12,10 @@ class WordRepository(private val wordDao: WordDao) {
     suspend fun insert(word: Word){
         wordDao.insert(word)
     }
+    //데이터 초기화
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun deleteAll(){
+        wordDao.deleteAll()
+    }
 }
