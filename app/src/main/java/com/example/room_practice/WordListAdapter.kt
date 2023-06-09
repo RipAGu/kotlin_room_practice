@@ -7,6 +7,8 @@ import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.room_practice.databinding.ActivityMainBinding
+import com.example.room_practice.databinding.RecyclerviewItemBinding
 
 class WordListAdapter : ListAdapter<Word, WordListAdapter.WordViewHolder>(WordComparator()) {
 
@@ -19,18 +21,17 @@ class WordListAdapter : ListAdapter<Word, WordListAdapter.WordViewHolder>(WordCo
         holder.bind(current.word)
     }
 
-    class WordViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val wordItemView: ActionMenuItemView = itemView.findViewById(R.id.textView)
+    class WordViewHolder(private val binding: RecyclerviewItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(text: String?) {
-            wordItemView.text = text
+            binding.tts.text = text
         }
 
         companion object {
             fun create(parent: ViewGroup): WordViewHolder {
                 val view: View = LayoutInflater.from(parent.context)
                     .inflate(R.layout.recyclerview_item, parent, false)
-                return WordViewHolder(view)
+                return WordViewHolder(RecyclerviewItemBinding.bind(view))
             }
         }
     }
